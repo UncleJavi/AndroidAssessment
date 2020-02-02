@@ -63,6 +63,10 @@ public class PostDetail extends AppCompatActivity {
             Bitmap logo = null;
             try{
                 InputStream is = new URL(urlOfImage).openStream();
+                /*
+                    decodeStream(InputStream is)
+                        Decode an input stream into a bitmap.
+                 */
                 logo = BitmapFactory.decodeStream(is);
             }catch(Exception e){ // Catch the download exception
                 e.printStackTrace();
@@ -70,6 +74,10 @@ public class PostDetail extends AppCompatActivity {
             return logo;
         }
 
+        /*
+            onPostExecute(Result result)
+                Runs on the UI thread after doInBackground(Params...).
+         */
         protected void onPostExecute(Bitmap result){
             imageView.setImageBitmap(result);
         }

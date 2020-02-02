@@ -20,6 +20,8 @@ import java.util.Locale;
 
 public class ListViewAdapter extends BaseAdapter {
 
+    // Declare Variables
+
     Context mContext;
     LayoutInflater inflater;
     private ArrayList<Post> arraylist;
@@ -58,6 +60,7 @@ public class ListViewAdapter extends BaseAdapter {
         if (view == null) {
             holder = new ViewHolder();
             view = inflater.inflate(R.layout.listview_item, null);
+            // Locate the TextViews in listview_item.xml
             holder.title = (TextView) view.findViewById(R.id.title);
             holder.img = (ImageView) view.findViewById(R.id.img);
             holder.autor = (TextView) view.findViewById(R.id.author);
@@ -65,18 +68,21 @@ public class ListViewAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) view.getTag();
         }
+        // Set the results into TextViews
         holder.title.setText(MainActivity.postArrayList.get(position).getTitle());
         holder.autor.setText(MainActivity.postArrayList.get(position).getAuthor());
         new DownLoadImageTask(holder.img).execute(MainActivity.postArrayList.get(position).getImageUrl());
         return view;
     }
 
+    // Filter Class
     public int filter(String charText) {
 
         charText = charText.toLowerCase(Locale.getDefault());
         MainActivity.postArrayList.clear();
 
         if (charText.length() == 0) {
+          // MainActivity.postArrayList.addAll(arraylist);
         } else {
             for (Post wp : arraylist) {
                 if (wp.getTitle().toLowerCase(Locale.getDefault()).contains(charText)) {
@@ -95,11 +101,19 @@ public class ListViewAdapter extends BaseAdapter {
             this.imageView = imageView;
         }
 
+        /*
+            doInBackground(Params... params)
+                Override this method to perform a computation on a background thread.
+         */
         protected Bitmap doInBackground(String...urls){
             String urlOfImage = urls[0];
             Bitmap logo = null;
             try{
                 InputStream is = new URL(urlOfImage).openStream();
+                /*
+                    decodeStream(InputStream is)
+                        Decode an input stream into a bitmap.
+                 */
                 logo = BitmapFactory.decodeStream(is);
             }catch(Exception e){ // Catch the download exception
                 e.printStackTrace();
@@ -107,6 +121,10 @@ public class ListViewAdapter extends BaseAdapter {
             return logo;
         }
 
+        /*
+            onPostExecute(Result result)
+                Runs on the UI thread after doInBackground(Params...).
+         */
         protected void onPostExecute(Bitmap result){
             imageView.setImageBitmap(result);
         }
