@@ -49,10 +49,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         String jsonurl = Config.APIUrl;
         new JsonTask().execute(jsonurl);
 
-//        for (int i = 0; i <5; i++) {
-//            Post post = new Post("My post", "Pys111",  "https://homepages.cae.wisc.edu/~ece533/images/airplane.png", "2020-20-01", "pus description 1awu2u2iu342u49u2i4uiweuriwuerwerw");
-//            postArrayList.add(post);
-//        }
 
     }
     private void settingAdapter()
@@ -93,7 +89,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     }
     private void setResult(String jsonstring)
     {
-       // Log.e("11111", jsonstring);
         try {
             JSONObject obj = new JSONObject(jsonstring);
             String result_OK = obj.getString("stat");
@@ -198,19 +193,10 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 }
                 builder.setTitle("Loading error....")
                         .setMessage("Your Account can't get data , please call customers service")
-//                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                SharedPreferencesUtil.setCode("");
-//                                SharedPreferencesUtil.setHostFileName("");
-//                                SharedPreferencesUtil.setExpiredDate("");
-//                                Intent intent = new Intent(MainScreenActivity.this, LoginActivity.class);
-//                                intent.putExtra(LoginActivity.class.getSimpleName(), "");
-//                                startActivity(intent);
-//                            }
-//                        })
+
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                // do nothing
+
                             }
                         })
                         .setIcon(android.R.drawable.ic_dialog_alert)
