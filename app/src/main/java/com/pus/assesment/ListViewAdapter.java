@@ -20,7 +20,6 @@ import java.util.Locale;
 
 public class ListViewAdapter extends BaseAdapter {
 
-
     Context mContext;
     LayoutInflater inflater;
     private ArrayList<Post> arraylist;
@@ -72,14 +71,12 @@ public class ListViewAdapter extends BaseAdapter {
         return view;
     }
 
-
     public int filter(String charText) {
 
         charText = charText.toLowerCase(Locale.getDefault());
         MainActivity.postArrayList.clear();
 
         if (charText.length() == 0) {
-          // MainActivity.postArrayList.addAll(arraylist);
         } else {
             for (Post wp : arraylist) {
                 if (wp.getTitle().toLowerCase(Locale.getDefault()).contains(charText)) {
@@ -98,18 +95,30 @@ public class ListViewAdapter extends BaseAdapter {
             this.imageView = imageView;
         }
 
+        /*
+            doInBackground(Params... params)
+                Override this method to perform a computation on a background thread.
+         */
         protected Bitmap doInBackground(String...urls){
             String urlOfImage = urls[0];
             Bitmap logo = null;
             try{
                 InputStream is = new URL(urlOfImage).openStream();
+                /*
+                    decodeStream(InputStream is)
+                        Decode an input stream into a bitmap.
+                 */
                 logo = BitmapFactory.decodeStream(is);
-            }catch(Exception e){
+            }catch(Exception e){ // Catch the download exception
                 e.printStackTrace();
             }
             return logo;
         }
 
+        /*
+            onPostExecute(Result result)
+                Runs on the UI thread after doInBackground(Params...).
+         */
         protected void onPostExecute(Bitmap result){
             imageView.setImageBitmap(result);
         }

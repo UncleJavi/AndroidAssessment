@@ -6,12 +6,14 @@ public class Post {
     private  String imageUrl;
     private  String date;
     private  String description;
-    public Post(String title, String author, String imageUrl, String date, String description) {
+    private  String largeImage;
+    public Post(String title, String author, String imageUrl, String date, String description, String largeImage) {
         this.title = title;
         this.author = author;
         this.imageUrl = imageUrl;
         this.date = date;
         this.description = description;
+        this.largeImage = largeImage;
     }
 
     public String getTitle() {
@@ -29,5 +31,7 @@ public class Post {
     public String getDescription() {
         return this.description;
     }
-
+    public String getLargeImage() {
+        return  this.largeImage;
+    }
 }

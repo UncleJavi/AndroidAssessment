@@ -28,7 +28,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
     private ListView list;
@@ -48,8 +51,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         getSupportActionBar().hide();
         String jsonurl = Config.APIUrl;
         new JsonTask().execute(jsonurl);
-
-
     }
     private void settingAdapter()
     {
@@ -89,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     }
     private void setResult(String jsonstring)
     {
+        Log.e("11111", jsonstring);
         try {
             JSONObject obj = new JSONObject(jsonstring);
             String result_OK = obj.getString("stat");
@@ -101,13 +103,14 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                     obj = jsonArray.getJSONObject(i);
                     String title = obj.getJSONObject("title").getString("_content");
                     String imageUrl = obj.getJSONObject("primary_photo_extras").getString("url_sq");
+                    String largeimageUrl = obj.getJSONObject("primary_photo_extras").getString("url_m");
                     String author = obj.getJSONObject("primary_photo_extras").getString("ownername");
                     long time  = (long) Double.parseDouble(obj.getJSONObject("primary_photo_extras").getString("lastupdate"))*1000L;
                     Date u_date = new Date(time);
                     SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy ");
                     String date = sdf.format(u_date).toString();
                     String description = obj.getJSONObject("description").getString("_content");
-                    Post post = new Post(title, author,  imageUrl, date, description);
+                    Post post = new Post(title, author,  imageUrl, date, description, largeimageUrl);
                     postArrayList.add(post);
                 }
                 settingAdapter();
@@ -193,7 +196,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 }
                 builder.setTitle("Loading error....")
                         .setMessage("Your Account can't get data , please call customers service")
-
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
 

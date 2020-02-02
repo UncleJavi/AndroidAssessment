@@ -24,12 +24,24 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_marginTop="30dp"
-                    android:layout_height="150dp">
-                    <ImageView
-                        android:id="@+id/dimg"
-                        android:scaleType="fitXY"
+                    android:layout_height="180dp">
+                    <LinearLayout
+                        android:orientation="vertical"
                         android:layout_width="120dp"
-                        android:layout_height="120dp"/>
+                        android:layout_height="180dp">
+                        <ImageView
+                            android:id="@+id/dimg"
+                            android:scaleType="fitXY"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"/>
+                        <Button
+                            android:id="@+id/dzoom"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:text="show with Zoom"
+                            android:textColor="#0000f0"/>
+                    </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -65,6 +77,7 @@
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
@@ -74,6 +87,15 @@
                         android:textColor="#000000"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
+                    <Button
+                        android:id="@+id/shareImg"
+                        android:layout_width="120dp"
+                        android:layout_height="40dp"
+                        android:background="#00f000"
+                        android:layout_gravity="right"
+                        android:text="Share Image"
+                        >
+                    </Button>
                 </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
